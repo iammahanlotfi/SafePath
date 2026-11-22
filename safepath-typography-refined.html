@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SafePath — همراه امن شما</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{--ui-scale:1.22;--font-scale:1.48;--ink:#172b2a;--muted:#72817d;--line:#e6ece8;--paper:#f7f9f6;--white:#fff;--green:#087f68;--green2:#0b9b7c;--mint:#e6f5ef;--lime:#d9f36b;--amber:#f4b544;--red:#d75b51;--shadow:0 calc(var(--ui-scale) * 14px) calc(var(--ui-scale) * 40px) rgba(28,57,48,.07);--radius:calc(var(--ui-scale) * 20px)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:calc(var(--font-scale) * 14px)/1.8 Vazirmatn,Tahoma,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.top{height:calc(var(--ui-scale) * 76px);background:rgba(255,255,255,.94);backdrop-filter:blur(calc(var(--ui-scale) * 14px));border-bottom:calc(var(--ui-scale) * 1px) solid var(--line);display:flex;align-items:center;padding:0 max(4vw,calc(var(--ui-scale) * 24px));gap:calc(var(--ui-scale) * 34px);position:sticky;top:0;z-index:9}
+.brand{display:flex;align-items:center;gap:calc(var(--ui-scale) * 10px);text-decoration:none;color:var(--ink)}.brandmark{width:calc(var(--ui-scale) * 40px);height:calc(var(--ui-scale) * 40px);border-radius:calc(var(--ui-scale) * 14px);background:var(--green);color:white;display:grid;place-items:center;font-size:calc(var(--font-scale) * 23px);font-weight:800;box-shadow:0 calc(var(--ui-scale) * 6px) calc(var(--ui-scale) * 14px) #087f6833}.brandname{font-weight:800;font-size:calc(var(--font-scale) * 18px);line-height:1.2}.brandname small{display:block;font-size:calc(var(--font-scale) * 9px);color:var(--muted);font-weight:500;letter-spacing:.2px}
+.nav{display:flex;gap:calc(var(--ui-scale) * 25px);align-items:center}.nav a{color:#63736e;text-decoration:none;font-size:calc(var(--font-scale) * 12px);font-weight:600;padding:calc(var(--ui-scale) * 8px) 0}.nav a.active{color:var(--green);border-bottom:calc(var(--ui-scale) * 2px) solid var(--green)}
+.user{margin-right:auto;display:flex;align-items:center;gap:calc(var(--ui-scale) * 9px)}.user .avatar{width:calc(var(--ui-scale) * 36px);height:calc(var(--ui-scale) * 36px);border-radius:50%;background:#e9eee8;display:grid;place-items:center;font-weight:800;color:var(--green)}.user b{font-size:calc(var(--font-scale) * 11px);display:block}.user small{font-size:calc(var(--font-scale) * 9px);color:var(--muted);display:block}
+.wrap{max-width:calc(var(--ui-scale) * 1440px);margin:0 auto;padding:calc(var(--ui-scale) * 32px) 4vw calc(var(--ui-scale) * 60px)}
+.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:calc(var(--ui-scale) * 20px);margin-bottom:calc(var(--ui-scale) * 23px)}.eyebrow{font-size:calc(var(--font-scale) * 10px);color:var(--green);font-weight:800;letter-spacing:.6px}.welcome h1{font-size:calc(var(--font-scale) * 27px);line-height:1.5;margin:calc(var(--ui-scale) * 3px) 0 0;font-weight:800;letter-spacing:-.6px}.welcome p{margin:calc(var(--ui-scale) * 3px) 0 0;color:var(--muted);font-size:calc(var(--font-scale) * 12px)}.date{font-size:calc(var(--font-scale) * 10px);color:var(--muted);background:white;border:calc(var(--ui-scale) * 1px) solid var(--line);border-radius:calc(var(--ui-scale) * 30px);padding:calc(var(--ui-scale) * 8px) calc(var(--ui-scale) * 13px)}
+.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:calc(var(--ui-scale) * 18px);margin-bottom:calc(var(--ui-scale) * 19px)}
+.hero-copy{background:var(--green);color:white;border-radius:calc(var(--ui-scale) * 26px);padding:calc(var(--ui-scale) * 30px) calc(var(--ui-scale) * 32px);position:relative;overflow:hidden;min-height:calc(var(--ui-scale) * 250px);display:flex;flex-direction:column;justify-content:center}
+.hero-copy:after{content:"";position:absolute;width:calc(var(--ui-scale) * 300px);height:calc(var(--ui-scale) * 300px);border:calc(var(--ui-scale) * 1px) solid #ffffff20;border-radius:50%;left:-90px;top:-150px;box-shadow:0 0 0 calc(var(--ui-scale) * 34px) #ffffff0c,0 0 0 calc(var(--ui-scale) * 70px) #ffffff08}
+.hero-copy .eyebrow{color:var(--lime)}.hero-copy h2{font-size:calc(var(--font-scale) * 24px);line-height:1.6;margin:calc(var(--ui-scale) * 7px) 0 calc(var(--ui-scale) * 4px);max-width:calc(var(--ui-scale) * 480px);position:relative;z-index:1}.hero-copy p{color:#d5ebe4;font-size:calc(var(--font-scale) * 12px);margin:0 0 calc(var(--ui-scale) * 18px);max-width:calc(var(--ui-scale) * 460px);position:relative;z-index:1}
+.primary{background:var(--lime);border:0;border-radius:calc(var(--ui-scale) * 12px);padding:calc(var(--ui-scale) * 11px) calc(var(--ui-scale) * 18px);color:#23352b;font-weight:800;font-size:calc(var(--font-scale) * 12px);align-self:flex-start;position:relative;z-index:1}.primary:hover{filter:brightness(.97);transform:translateY(-1px)}
+.hero-art{background:#e9f1e9;border-radius:calc(var(--ui-scale) * 26px);position:relative;overflow:hidden;min-height:calc(var(--ui-scale) * 250px);display:flex;align-items:center;justify-content:center}
+.art-circle{width:calc(var(--ui-scale) * 215px);height:calc(var(--ui-scale) * 215px);border-radius:50%;border:calc(var(--ui-scale) * 1px) solid #c7d9cd;display:grid;place-items:center;position:relative}.art-circle:before,.art-circle:after{content:"";position:absolute;border:calc(var(--ui-scale) * 1px) dashed #a8c5b2;border-radius:50%;inset:calc(var(--ui-scale) * 22px)}.art-circle:after{inset:calc(var(--ui-scale) * 48px);border-style:solid}.art-pin{width:calc(var(--ui-scale) * 72px);height:calc(var(--ui-scale) * 72px);border-radius:calc(var(--ui-scale) * 25px) calc(var(--ui-scale) * 25px) calc(var(--ui-scale) * 25px) calc(var(--ui-scale) * 7px);transform:rotate(-45deg);background:var(--green);display:grid;place-items:center;color:white;font-size:calc(var(--font-scale) * 30px);box-shadow:0 calc(var(--ui-scale) * 12px) calc(var(--ui-scale) * 24px) #087f6840}.art-pin span{transform:rotate(45deg)}.float{position:absolute;background:white;padding:calc(var(--ui-scale) * 8px) calc(var(--ui-scale) * 12px);border-radius:calc(var(--ui-scale) * 12px);box-shadow:var(--shadow);font-size:calc(var(--font-scale) * 10px);font-weight:700}.float.one{top:calc(var(--ui-scale) * 27px);right:calc(var(--ui-scale) * 25px)}.float.two{bottom:calc(var(--ui-scale) * 27px);left:calc(var(--ui-scale) * 23px)}.float i{display:inline-block;width:calc(var(--ui-scale) * 7px);height:calc(var(--ui-scale) * 7px);border-radius:50%;background:#16a078;margin-left:calc(var(--ui-scale) * 5px)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--ui-scale) * 13px);margin-bottom:calc(var(--ui-scale) * 19px)}.quick-card{background:white;border:calc(var(--ui-scale) * 1px) solid var(--line);border-radius:calc(var(--ui-scale) * 17px);padding:calc(var(--ui-scale) * 16px) calc(var(--ui-scale) * 18px);display:flex;align-items:center;gap:calc(var(--ui-scale) * 13px)}.qicon{width:calc(var(--ui-scale) * 43px);height:calc(var(--ui-scale) * 43px);border-radius:calc(var(--ui-scale) * 14px);background:var(--mint);display:grid;place-items:center;color:var(--green);font-size:calc(var(--font-scale) * 20px)}.quick-card b{font-size:calc(var(--font-scale) * 20px);display:block;line-height:1.25}.quick-card small{color:var(--muted);font-size:calc(var(--font-scale) * 10px)}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:calc(var(--ui-scale) * 12px)}.section-title h2{font-size:calc(var(--font-scale) * 15px);margin:0;font-weight:800}.section-title p{font-size:calc(var(--font-scale) * 10px);color:var(--muted);margin:calc(var(--ui-scale) * 1px) 0 0}.link{border:0;background:none;color:var(--green);font-size:calc(var(--font-scale) * 11px);font-weight:800}
+.content-grid{display:grid;grid-template-columns:1.45fr .75fr;gap:calc(var(--ui-scale) * 17px)}
+.panel{background:white;border:calc(var(--ui-scale) * 1px) solid var(--line);border-radius:var(--radius);padding:calc(var(--ui-scale) * 19px);box-shadow:var(--shadow);min-width:0}
+.map-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:calc(var(--ui-scale) * 13px)}.map-head b{font-size:calc(var(--font-scale) * 13px)}.live{background:var(--mint);color:var(--green);border-radius:calc(var(--ui-scale) * 30px);padding:calc(var(--ui-scale) * 4px) calc(var(--ui-scale) * 10px);font-size:calc(var(--font-scale) * 9px);font-weight:800}
+.map{height:calc(var(--ui-scale) * 335px);border-radius:calc(var(--ui-scale) * 15px);overflow:hidden;position:relative;background:#e8eee7}.map svg{width:100%;height:100%;display:block}.map-control{position:absolute;left:calc(var(--ui-scale) * 12px);top:calc(var(--ui-scale) * 12px);display:grid;gap:calc(var(--ui-scale) * 6px)}.map-control button{width:calc(var(--ui-scale) * 34px);height:calc(var(--ui-scale) * 34px);border:calc(var(--ui-scale) * 1px) solid #dce5de;background:#fff;border-radius:calc(var(--ui-scale) * 10px);color:var(--green);font-size:calc(var(--font-scale) * 18px)}
+.map-foot{display:flex;gap:calc(var(--ui-scale) * 15px);flex-wrap:wrap;margin-top:calc(var(--ui-scale) * 12px)}.legend{font-size:calc(var(--font-scale) * 9px);color:var(--muted);display:flex;align-items:center;gap:calc(var(--ui-scale) * 6px)}.legend i{width:calc(var(--ui-scale) * 8px);height:calc(var(--ui-scale) * 8px);border-radius:50%;display:inline-block}
+.nearest{display:flex;flex-direction:column}.nearest-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:calc(var(--ui-scale) * 12px)}.nearest-head h2{font-size:calc(var(--font-scale) * 14px);margin:0}.nearest-head span{font-size:calc(var(--font-scale) * 9px);color:var(--muted)}
+.shelter{padding:calc(var(--ui-scale) * 13px) 0;border-bottom:calc(var(--ui-scale) * 1px) solid #edf1ed}.shelter:last-of-type{border:0}.shelter-top{display:flex;align-items:flex-start;gap:calc(var(--ui-scale) * 10px)}.shelter-icon{width:calc(var(--ui-scale) * 36px);height:calc(var(--ui-scale) * 36px);border-radius:calc(var(--ui-scale) * 12px);background:#f0f5ef;color:var(--green);display:grid;place-items:center;font-size:calc(var(--font-scale) * 17px);flex:none}.shelter-info{flex:1;min-width:0}.shelter-info b{font-size:calc(var(--font-scale) * 11px);display:block}.shelter-info small{font-size:calc(var(--font-scale) * 9px);color:var(--muted)}.distance{font-size:calc(var(--font-scale) * 10px);color:var(--green);font-weight:800;white-space:nowrap}.capacity{height:calc(var(--ui-scale) * 5px);background:#edf1ed;border-radius:calc(var(--ui-scale) * 8px);margin:calc(var(--ui-scale) * 10px) 0 calc(var(--ui-scale) * 4px);overflow:hidden}.capacity i{display:block;height:100%;background:#19a17d;border-radius:calc(var(--ui-scale) * 8px)}.capacity-note{font-size:calc(var(--font-scale) * 9px);color:var(--muted);display:flex;justify-content:space-between}
+.shelter-btn{width:100%;margin-top:calc(var(--ui-scale) * 12px);background:#f1f7f3;border:calc(var(--ui-scale) * 1px) solid #e0eee5;color:var(--green);border-radius:calc(var(--ui-scale) * 11px);padding:calc(var(--ui-scale) * 10px);font-size:calc(var(--font-scale) * 11px);font-weight:800}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--ui-scale) * 17px);margin-top:calc(var(--ui-scale) * 17px)}.notice-card{display:flex;gap:calc(var(--ui-scale) * 13px);align-items:flex-start;background:#fff9e9;border:calc(var(--ui-scale) * 1px) solid #f4e8c8;border-radius:calc(var(--ui-scale) * 17px);padding:calc(var(--ui-scale) * 16px)}.notice-icon{width:calc(var(--ui-scale) * 35px);height:calc(var(--ui-scale) * 35px);border-radius:calc(var(--ui-scale) * 11px);background:#ffedc2;color:#976500;display:grid;place-items:center;flex:none}.notice-card b{font-size:calc(var(--font-scale) * 11px);display:block}.notice-card p{font-size:calc(var(--font-scale) * 10px);color:#85744e;margin:calc(var(--ui-scale) * 3px) 0 0}
+.activity-item{display:flex;align-items:flex-start;gap:calc(var(--ui-scale) * 10px);padding:calc(var(--ui-scale) * 9px) 0;border-bottom:calc(var(--ui-scale) * 1px) solid #edf1ed}.activity-item:last-child{border:0}.activity-dot{width:calc(var(--ui-scale) * 8px);height:calc(var(--ui-scale) * 8px);border-radius:50%;background:var(--green);margin-top:calc(var(--ui-scale) * 8px)}.activity-item b{font-size:calc(var(--font-scale) * 10px);display:block}.activity-item small{font-size:calc(var(--font-scale) * 9px);color:var(--muted)}
+/* interactive pages */
+.page{display:none}.page.active{display:block}.subnav{display:flex;gap:calc(var(--ui-scale) * 8px);margin-bottom:calc(var(--ui-scale) * 18px);flex-wrap:wrap}.chip{border:calc(var(--ui-scale) * 1px) solid var(--line);background:white;color:#6c7b75;border-radius:calc(var(--ui-scale) * 30px);padding:calc(var(--ui-scale) * 7px) calc(var(--ui-scale) * 13px);font-size:calc(var(--font-scale) * 10px)}.chip.active{background:var(--green);border-color:var(--green);color:white}
+.formpanel{max-width:calc(var(--ui-scale) * 780px)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--ui-scale) * 13px)}.field{display:grid;gap:calc(var(--ui-scale) * 5px)}.field.full{grid-column:1/-1}.field label{font-size:calc(var(--font-scale) * 10px);font-weight:800;color:#52635d}.field input,.field select{border:calc(var(--ui-scale) * 1px) solid var(--line);background:#fbfcfa;border-radius:calc(var(--ui-scale) * 10px);padding:calc(var(--ui-scale) * 11px) calc(var(--ui-scale) * 12px);outline:none;color:var(--ink);width:100%}.field input:focus,.field select:focus{border-color:#66b69f;box-shadow:0 0 0 calc(var(--ui-scale) * 3px) #0b9b7c14}
+.action{border:0;border-radius:calc(var(--ui-scale) * 11px);background:var(--green);color:white;padding:calc(var(--ui-scale) * 11px) calc(var(--ui-scale) * 18px);font-weight:800;font-size:calc(var(--font-scale) * 11px)}.secondary{border:calc(var(--ui-scale) * 1px) solid var(--line);background:white;color:var(--ink);border-radius:calc(var(--ui-scale) * 11px);padding:calc(var(--ui-scale) * 10px) calc(var(--ui-scale) * 15px);font-size:calc(var(--font-scale) * 11px);font-weight:700}
+.route-result{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--ui-scale) * 10px);margin:calc(var(--ui-scale) * 15px) 0}.result{background:#f5f8f5;border-radius:calc(var(--ui-scale) * 12px);padding:calc(var(--ui-scale) * 12px)}.result b{font-size:calc(var(--font-scale) * 18px);display:block}.result small{font-size:calc(var(--font-scale) * 9px);color:var(--muted)}
+.table{width:100%;border-collapse:collapse;min-width:calc(var(--ui-scale) * 640px)}.table th{text-align:right;font-size:calc(var(--font-scale) * 9px);color:var(--muted);padding:calc(var(--ui-scale) * 12px);border-bottom:calc(var(--ui-scale) * 1px) solid var(--line)}.table td{font-size:calc(var(--font-scale) * 10px);padding:calc(var(--ui-scale) * 12px);border-bottom:calc(var(--ui-scale) * 1px) solid #eff2ef}.table-wrap{overflow:auto}
+.pill{padding:calc(var(--ui-scale) * 3px) calc(var(--ui-scale) * 8px);border-radius:calc(var(--ui-scale) * 30px);font-size:calc(var(--font-scale) * 9px);font-weight:800;background:var(--mint);color:var(--green)}.pill.warn{background:#fff4d9;color:#946700}.pill.red{background:#ffefed;color:#b54a42}
+.algo{display:grid;grid-template-columns:1.2fr .8fr;gap:calc(var(--ui-scale) * 15px)}.graph{height:calc(var(--ui-scale) * 280px);background:#f3f7f3;border-radius:calc(var(--ui-scale) * 13px);overflow:hidden}.graph svg{width:100%;height:100%}.steps{display:grid;gap:calc(var(--ui-scale) * 8px)}.step{padding:calc(var(--ui-scale) * 10px);border:calc(var(--ui-scale) * 1px) solid var(--line);border-radius:calc(var(--ui-scale) * 11px);font-size:calc(var(--font-scale) * 10px)}.step b{display:block}.step.active{border-color:#8bcbb4;background:#f1faf5}
+.toast{position:fixed;bottom:calc(var(--ui-scale) * 22px);left:calc(var(--ui-scale) * 22px);background:var(--ink);color:white;padding:calc(var(--ui-scale) * 11px) calc(var(--ui-scale) * 16px);border-radius:calc(var(--ui-scale) * 12px);font-size:calc(var(--font-scale) * 11px);opacity:0;transform:translateY(calc(var(--ui-scale) * 8px));transition:.2s;z-index:20}.toast.show{opacity:1;transform:none}
+.footer{margin-top:calc(var(--ui-scale) * 28px);padding-top:calc(var(--ui-scale) * 17px);border-top:calc(var(--ui-scale) * 1px) solid var(--line);display:flex;justify-content:space-between;color:#93a09a;font-size:calc(var(--font-scale) * 9px)}
+
+
+
+
+/* Motion polish */
+button,.quick-card,.panel,.shelter,.chip,.brand,.map-control button,.secondary,.action,.link{
+ transition:transform .22s ease, box-shadow .22s ease, background-color .22s ease,
+ color .22s ease, border-color .22s ease;
+}
+.quick-card:hover,.panel:hover{
+ box-shadow:0 18px 44px rgba(28,57,48,.10);
+}
+.quick-card:hover{transform:translateY(-3px)}
+.shelter:hover{transform:translateX(-3px)}
+.map-control button:hover,.secondary:hover,.chip:hover{
+ transform:translateY(-2px);
+ box-shadow:0 7px 16px rgba(28,57,48,.09);
+}
+.action:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(8,127,104,.20)}
+.link:hover{transform:translateX(-2px)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{
+ outline:3px solid rgba(8,127,104,.24);outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+
+/* Header navigation underline: expands from the center to both sides */
+.nav a{
+  border-bottom:0!important;
+  position:relative;
+  transition:color .25s ease;
+}
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:var(--green);
+  transform:translateX(-50%);
+  transition:width .32s cubic-bezier(.2,.75,.25,1);
+}
+.nav a:hover,.nav a.active{color:var(--green)}
+.nav a:hover::after,.nav a.active::after{width:100%}
+
+
+/* SafePath responsive system — aligned with Marketplace breakpoints */
+
+/* Small desktop / landscape tablet: 769px–1200px */
+
+
+/* Tablet: 577px–768px */
+
+
+/* Mobile: up to 576px */
+
+
+/* Narrow mobile: 381px–480px */
+
+
+/* Very narrow mobile: up to 380px */
+
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+
+/* Layout correction for compact laptop / wide tablet widths (577px–900px).
+   Keep the map and shelter list from competing for a narrow two-column row. */
+
+/* =========================================================
+   SafePath responsive system
+   Desktop-first fluid type + standard device breakpoints
+   ========================================================= */
+
+/* Fluid typography: preserve approved desktop scale, then step down by viewport */
+:root { --font-scale: 1.48; }
+
+@media (max-width: 1199.98px) {
+  :root { --font-scale: 1.34; }
+  .wrap { padding: 28px 28px 52px; }
+  .top { padding-inline: 28px; }
+  .nav { gap: 20px; }
+  .content-grid { grid-template-columns:minmax(0,1.3fr) minmax(280px,.8fr); }
+  .hero-copy { padding: 27px; }
+}
+
+@media (max-width: 991.98px) {
+  :root { --font-scale: 1.22; }
+  .top { gap: 20px; }
+  .nav { gap: 16px; }
+  .wrap { padding: 24px 22px 44px; }
+  .hero { grid-template-columns:1fr .8fr; }
+  .hero-copy h2 { font-size:calc(var(--font-scale) * 19px); }
+  .content-grid { grid-template-columns:minmax(0,1fr); }
+  .nearest {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:18px;
+  }
+  .nearest-head,.shelter-btn { grid-column:1/-1; }
+  .shelter { min-width:0; }
+  .shelter-top { min-width:0; }
+  .shelter-info { min-width:0; }
+  .shelter-info b,.shelter-info small { overflow-wrap:anywhere; }
+  .bottom { grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width: 767.98px) {
+  :root { --font-scale: 1.10; }
+  .top {
+    height:auto; min-height:0;
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-rows:auto auto;
+    padding:12px 18px;
+    gap:10px 14px;
+  }
+  .brand { grid-column:1; grid-row:1; }
+  .user { grid-column:2; grid-row:1; margin:0; }
+  .user>div:nth-child(2) { display:block; }
+  .nav {
+    display:flex;
+    grid-column:1/-1; grid-row:2;
+    width:100%;
+    justify-content:space-between;
+    gap:12px;
+    overflow-x:auto;
+    border-top:1px solid var(--line);
+    padding-top:8px;
+    scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { white-space:nowrap; flex:none; font-size:calc(var(--font-scale) * 10px); }
+  .wrap { padding:22px 18px 40px; }
+  .welcome { align-items:flex-start; }
+  .welcome h1 { font-size:calc(var(--font-scale) * 22px); }
+  .hero { grid-template-columns:1fr; }
+  .hero-copy { min-height:210px; }
+  .hero-art { min-height:190px; }
+  .quick { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .quick-card { padding:12px 10px; gap:9px; }
+  .quick-card b { font-size:calc(var(--font-scale) * 15px); }
+  .quick-card small { font-size:calc(var(--font-scale) * 8px); line-height:1.5; }
+  .content-grid,.bottom { grid-template-columns:1fr; }
+  .nearest { display:block; }
+  .map { height:290px; }
+  .fields,.algo { grid-template-columns:1fr 1fr; }
+  .table { min-width:620px; }
+}
+
+@media (max-width: 575.98px) {
+  :root { --font-scale: 1.00; }
+  .top { padding:10px 14px; }
+  .user>div:nth-child(2) { display:none; }
+  .wrap { padding:18px 13px 34px; }
+  .welcome { flex-direction:column; gap:9px; }
+  .welcome h1 { font-size:calc(var(--font-scale) * 20px); }
+  .welcome p { font-size:calc(var(--font-scale) * 11px); }
+  .date { font-size:calc(var(--font-scale) * 9px); }
+  .hero-copy { min-height:200px; padding:21px; }
+  .hero-copy h2 { font-size:calc(var(--font-scale) * 20px); }
+  .hero-copy p { font-size:calc(var(--font-scale) * 11px); }
+  .hero-art { min-height:175px; }
+  .art-circle { width:150px; height:150px; }
+  .quick { gap:7px; }
+  .quick-card { flex-direction:column; align-items:flex-start; padding:10px 9px; }
+  .quick-card b { font-size:calc(var(--font-scale) * 14px); }
+  .quick-card small { font-size:calc(var(--font-scale) * 8px); }
+  .qicon { width:34px; height:34px; }
+  .panel { padding:14px; }
+  .map { height:245px; }
+  .nearest { display:block; }
+  .fields,.algo { grid-template-columns:1fr; }
+  .route-result { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+  .result { padding:9px; }
+  .result b { font-size:calc(var(--font-scale) * 13px); }
+  .section-title h2,.map-head b { font-size:calc(var(--font-scale) * 13px); }
+  .table-wrap { overflow-x:auto; }
+  .footer { flex-direction:column; gap:8px; }
+}
+
+@media (max-width: 399.98px) {
+  :root { --font-scale: .94; }
+  .top { padding-inline:11px; }
+  .nav { gap:9px; }
+  .nav a { font-size:calc(var(--font-scale) * 9px); }
+  .wrap { padding-inline:10px; }
+  .welcome h1 { font-size:calc(var(--font-scale) * 19px); }
+  .hero-copy { padding:18px; }
+  .hero-copy h2 { font-size:calc(var(--font-scale) * 18px); }
+  .quick { grid-template-columns:1fr; }
+  .quick-card { flex-direction:row; align-items:center; padding:10px 12px; }
+  .quick-card small { font-size:calc(var(--font-scale) * 9px); }
+  .map { height:220px; }
+  .route-result { grid-template-columns:1fr; }
+  .result { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .shelter-top { flex-wrap:wrap; }
+}
+
+
+/* =========================================================
+   SafePath visual refinement — glassmorphism + neumorphism
+   Subtle layered surfaces; readable contrast remains primary.
+   ========================================================= */
+:root {
+  --glass-border: rgba(255,255,255,.78);
+  --glass-bg: rgba(255,255,255,.72);
+  --glass-shadow: 0 18px 48px rgba(32,75,61,.075), 0 2px 8px rgba(32,75,61,.035);
+  --neo-light: rgba(255,255,255,.92);
+  --neo-dark: rgba(36,72,59,.10);
+}
+body {
+  background:
+    radial-gradient(ellipse at 8% 4%, rgba(193,231,211,.34), transparent 32%),
+    radial-gradient(ellipse at 92% 22%, rgba(216,239,226,.44), transparent 30%),
+    linear-gradient(135deg,#f7faf7 0%,#f1f6f1 52%,#f8faf7 100%);
+  background-attachment:fixed;
+}
+.top {
+  background:rgba(255,255,255,.74);
+  border-bottom:1px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 30px rgba(35,76,60,.055);
+  backdrop-filter:blur(22px) saturate(145%);
+  -webkit-backdrop-filter:blur(22px) saturate(145%);
+}
+.brandmark {
+  box-shadow:7px 7px 16px rgba(8,127,104,.20),-5px -5px 13px rgba(255,255,255,.38);
+}
+.header-tools {margin-right:auto;display:flex;align-items:center;gap:10px}
+.location-status {
+  display:flex;align-items:center;gap:10px;
+  border:1px solid rgba(255,255,255,.92);
+  border-radius:16px;padding:7px 13px 7px 15px;
+  color:var(--ink);background:rgba(255,255,255,.62);
+  box-shadow:6px 6px 15px rgba(39,78,63,.075),-5px -5px 13px rgba(255,255,255,.88);
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease;
+}
+.location-status:hover {transform:translateY(-2px);background:rgba(255,255,255,.88);box-shadow:8px 10px 20px rgba(39,78,63,.10),-5px -5px 13px white}
+.location-status-icon {width:35px;height:35px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#f5fbf7,#e5f2e9);color:var(--green);font-size:20px;box-shadow:inset 2px 2px 5px rgba(47,89,68,.06),inset -2px -2px 5px white}
+.location-status-copy {display:grid;text-align:right;line-height:1.45}
+.location-status-copy b {font-size:11px;font-weight:800}
+.location-status-copy small {font-size:9px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.location-status-copy i {width:6px;height:6px;border-radius:50%;background:#d5a13d;display:inline-block}
+.help-button {
+  width:39px;height:39px;border-radius:13px;border:1px solid rgba(255,255,255,.9);
+  color:var(--green);background:rgba(255,255,255,.65);font-weight:800;font-size:16px;
+  box-shadow:5px 5px 13px rgba(39,78,63,.075),-4px -4px 11px rgba(255,255,255,.9);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.help-button:hover {transform:translateY(-2px);box-shadow:7px 8px 16px rgba(39,78,63,.10),-4px -4px 11px white}
+.panel,.quick-card {
+  background:rgba(255,255,255,.76);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--glass-shadow);
+  backdrop-filter:blur(18px) saturate(135%);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+}
+.panel {border-radius:calc(var(--radius) * 1.08)}
+.quick-card {border-radius:18px}
+.quick-card:hover,.panel:hover {box-shadow:0 22px 52px rgba(28,57,48,.095),0 3px 10px rgba(28,57,48,.035)}
+.hero-copy {
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.18),0 18px 38px rgba(8,92,74,.16);
+}
+.hero-art {
+  background:linear-gradient(145deg,rgba(235,246,237,.92),rgba(218,235,222,.78));
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:inset 5px 5px 15px rgba(66,107,80,.055),inset -5px -5px 15px rgba(255,255,255,.78);
+}
+.float {
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);
+  box-shadow:8px 10px 22px rgba(43,78,60,.10),-3px -3px 10px rgba(255,255,255,.8);
+}
+.art-pin {box-shadow:9px 12px 25px rgba(8,127,104,.25),inset 2px 2px 5px rgba(255,255,255,.18)}
+.qicon,.shelter-icon,.notice-icon {
+  box-shadow:inset 2px 2px 5px rgba(46,91,68,.055),inset -3px -3px 6px rgba(255,255,255,.85),4px 5px 12px rgba(45,82,63,.045);
+}
+.primary,.action,.shelter-btn,.secondary,.chip,.map-control button {
+  box-shadow:5px 6px 13px rgba(37,75,59,.075),-3px -3px 9px rgba(255,255,255,.78);
+}
+.primary {box-shadow:6px 7px 16px rgba(26,55,39,.13),inset 1px 1px 0 rgba(255,255,255,.5)}
+.action {box-shadow:6px 7px 16px rgba(8,127,104,.18),inset 1px 1px 0 rgba(255,255,255,.16)}
+.map {
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:inset 3px 3px 9px rgba(43,76,57,.08),inset -3px -3px 9px rgba(255,255,255,.75);
+}
+.map-control button {backdrop-filter:blur(10px);background:rgba(255,255,255,.88)}
+.shelter {
+  border-radius:13px;
+  padding-inline:9px;
+  transition:background .22s ease,transform .22s ease,box-shadow .22s ease;
+}
+.shelter:hover {background:rgba(235,247,239,.68);box-shadow:inset 2px 2px 5px rgba(50,91,66,.045),inset -2px -2px 5px rgba(255,255,255,.8)}
+.field input,.field select,#search {
+  background:rgba(249,252,249,.82);
+  border:1px solid rgba(219,232,222,.95);
+  box-shadow:inset 2px 2px 5px rgba(46,80,58,.045),inset -2px -2px 5px rgba(255,255,255,.85);
+}
+.notice-card {box-shadow:5px 6px 16px rgba(100,80,25,.045),inset 1px 1px 0 rgba(255,255,255,.8)}
+@media (max-width:767.98px) {
+  .header-tools {gap:7px}
+  .location-status {padding:6px 9px}
+  .location-status-copy b {font-size:calc(var(--font-scale) * 9px)}
+  .location-status-copy small {font-size:calc(var(--font-scale) * 7px)}
+  .location-status-icon {width:31px;height:31px}
+  .help-button {width:35px;height:35px}
+}
+@media (max-width:575.98px) {
+  .location-status-copy {display:none}
+  .location-status {padding:5px;border-radius:12px}
+  .location-status-icon {width:32px;height:32px}
+}
+
+
+/* =========================================================
+   SAFEPATH — Advanced Glass / Neo visual language
+   Inspired by the source project's About, Contact and FAQ
+   page patterns; reinterpreted with SafePath's own palette.
+   ========================================================= */
+
+:root {
+  --sp-glass: rgba(255,255,255,.58);
+  --sp-glass-strong: rgba(255,255,255,.76);
+  --sp-glass-edge: rgba(255,255,255,.92);
+  --sp-glass-line: rgba(255,255,255,.68);
+  --sp-glass-shadow: 14px 18px 42px rgba(26,67,51,.09), -10px -10px 30px rgba(255,255,255,.86);
+  --sp-neo-raised: 8px 9px 20px rgba(38,77,58,.10), -8px -8px 20px rgba(255,255,255,.95);
+  --sp-neo-inset: inset 4px 4px 10px rgba(37,75,56,.075), inset -4px -4px 10px rgba(255,255,255,.92);
+  --sp-glow-green: rgba(31,174,130,.16);
+  --sp-glow-lime: rgba(217,243,107,.25);
+}
+html { scroll-behavior:smooth; }
+body {
+  background:
+    radial-gradient(ellipse at 8% 7%, rgba(169,222,191,.43), transparent 28%),
+    radial-gradient(ellipse at 91% 13%, rgba(206,240,220,.68), transparent 27%),
+    radial-gradient(ellipse at 80% 84%, rgba(215,241,222,.42), transparent 30%),
+    linear-gradient(135deg,#f4f8f3 0%,#edf4ee 48%,#f8faf7 100%);
+  background-attachment:fixed;
+}
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.32;
+  background-image:
+    radial-gradient(rgba(8,127,104,.13) .7px,transparent .7px);
+  background-size:23px 23px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.5),transparent 68%);
+}
+.top {
+  background:rgba(248,252,248,.62);
+  border-bottom:1px solid rgba(255,255,255,.88);
+  box-shadow:0 12px 34px rgba(30,74,54,.07),inset 0 1px 0 rgba(255,255,255,.9);
+  backdrop-filter:blur(28px) saturate(165%);
+  -webkit-backdrop-filter:blur(28px) saturate(165%);
+}
+.brandmark {
+  border:1px solid rgba(255,255,255,.42);
+  background:linear-gradient(145deg,#11977b,#056b59);
+  box-shadow:8px 9px 18px rgba(8,127,104,.23),inset 2px 2px 5px rgba(255,255,255,.24),inset -3px -3px 6px rgba(0,55,44,.18);
+}
+.nav a {padding:9px 2px}
+.nav a::after {height:3px;border-radius:8px;box-shadow:0 0 12px rgba(8,127,104,.28)}
+.header-tools .location-status,
+.help-button {
+  background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(235,246,238,.62));
+  border:1px solid var(--sp-glass-edge);
+  box-shadow:var(--sp-neo-raised),inset 1px 1px 0 white;
+  backdrop-filter:blur(16px);
+}
+.location-status-icon {
+  background:linear-gradient(145deg,#fafffb,#dcefe2);
+  box-shadow:var(--sp-neo-inset),0 0 0 1px rgba(255,255,255,.7);
+}
+.wrap {position:relative}
+.page.active {animation:spPageIn .48s cubic-bezier(.2,.75,.25,1) both}
+@keyframes spPageIn {
+  from {opacity:0;transform:translateY(10px);filter:blur(3px)}
+  to {opacity:1;transform:translateY(0);filter:blur(0)}
+}
+.welcome {
+  position:relative;
+  padding:10px 2px 17px;
+}
+.welcome::after {
+  content:"";
+  position:absolute;
+  width:180px;height:90px;
+  right:-24px;top:-20px;
+  z-index:-1;
+  background:radial-gradient(ellipse,var(--sp-glow-green),transparent 70%);
+  filter:blur(10px);
+  pointer-events:none;
+}
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 11px;
+  border:1px solid rgba(255,255,255,.85);
+  border-radius:999px;
+  background:rgba(255,255,255,.54);
+  box-shadow:4px 5px 12px rgba(38,77,58,.055),-4px -4px 12px rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);
+}
+.welcome h1 {
+  letter-spacing:-.7px;
+  text-shadow:0 2px 0 rgba(255,255,255,.7);
+}
+.date {
+  border:1px solid rgba(255,255,255,.92);
+  background:rgba(255,255,255,.56);
+  box-shadow:var(--sp-neo-raised);
+  backdrop-filter:blur(14px);
+}
+.hero {
+  position:relative;
+  isolation:isolate;
+}
+.hero-copy {
+  border:1px solid rgba(255,255,255,.28);
+  background:
+    radial-gradient(circle at 12% 12%,rgba(217,243,107,.22),transparent 30%),
+    radial-gradient(circle at 90% 100%,rgba(77,205,158,.22),transparent 38%),
+    linear-gradient(135deg,#087f68 0%,#086b5c 56%,#064f48 100%);
+  box-shadow:18px 22px 46px rgba(6,91,72,.20),inset 1px 1px 0 rgba(255,255,255,.24),inset -1px -1px 0 rgba(0,50,40,.18);
+}
+.hero-copy::before {
+  content:"";
+  position:absolute;
+  width:230px;height:230px;
+  right:-60px;bottom:-145px;
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:50%;
+  box-shadow:0 0 0 22px rgba(255,255,255,.045),0 0 0 48px rgba(255,255,255,.028),0 0 0 78px rgba(255,255,255,.018);
+  pointer-events:none;
+}
+.hero-copy::after {
+  width:340px;height:340px;
+  border-color:rgba(255,255,255,.16);
+  box-shadow:0 0 0 35px rgba(255,255,255,.055),0 0 0 72px rgba(255,255,255,.03),0 0 0 112px rgba(255,255,255,.018);
+}
+.hero-copy h2 {text-shadow:0 3px 18px rgba(0,45,35,.18)}
+.primary {
+  border:1px solid rgba(255,255,255,.62);
+  background:linear-gradient(145deg,#e9ff9b,#d4ef64);
+  box-shadow:8px 9px 20px rgba(0,40,31,.20),inset 2px 2px 4px rgba(255,255,255,.8),inset -2px -2px 4px rgba(126,151,37,.12);
+}
+.hero-art {
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(255,255,255,.78),transparent 38%),
+    radial-gradient(circle at 20% 15%,rgba(255,255,255,.9),transparent 32%),
+    linear-gradient(145deg,rgba(226,243,230,.88),rgba(205,229,211,.72));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:var(--sp-glass-shadow),inset 5px 5px 18px rgba(56,94,67,.07),inset -6px -6px 18px rgba(255,255,255,.95);
+}
+.art-circle {
+  border:1px solid rgba(255,255,255,.88);
+  background:rgba(255,255,255,.17);
+  box-shadow:0 0 0 14px rgba(255,255,255,.16),0 0 0 30px rgba(255,255,255,.10),inset 5px 5px 16px rgba(49,94,63,.07),inset -5px -5px 16px rgba(255,255,255,.8);
+  backdrop-filter:blur(7px);
+}
+.art-circle::before {border-color:rgba(8,127,104,.20)}
+.art-circle::after {border-color:rgba(8,127,104,.25);background:rgba(255,255,255,.15)}
+.art-pin {
+  border:1px solid rgba(255,255,255,.58);
+  background:linear-gradient(145deg,#13a486,#056c59);
+  box-shadow:12px 15px 28px rgba(5,104,83,.28),inset 2px 2px 5px rgba(255,255,255,.35),inset -3px -3px 6px rgba(0,53,43,.18);
+}
+.float {
+  border:1px solid rgba(255,255,255,.94);
+  background:rgba(255,255,255,.68);
+  box-shadow:10px 12px 24px rgba(40,77,57,.10),-6px -6px 18px rgba(255,255,255,.9),inset 1px 1px 0 white;
+  backdrop-filter:blur(20px) saturate(155%);
+}
+.quick-card {
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.96);
+  background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(239,248,241,.62));
+  box-shadow:var(--sp-neo-raised),inset 1px 1px 0 white;
+  backdrop-filter:blur(18px) saturate(145%);
+}
+.quick-card::before {
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(125deg,rgba(255,255,255,.52),transparent 45%);
+  opacity:.75;pointer-events:none;
+}
+.quick-card::after {
+  content:"";
+  position:absolute;width:100px;height:100px;left:-42px;bottom:-64px;
+  border-radius:50%;background:radial-gradient(circle,var(--sp-glow-green),transparent 70%);
+  pointer-events:none;
+}
+.quick-card:hover {
+  transform:translateY(-5px) scale(1.012);
+  border-color:rgba(8,127,104,.20);
+  box-shadow:14px 17px 30px rgba(31,75,53,.12),-8px -8px 22px rgba(255,255,255,.95),inset 1px 1px 0 white;
+}
+.qicon {
+  position:relative;z-index:1;
+  background:linear-gradient(145deg,#fafffb,#dfeee3);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:6px 7px 14px rgba(38,78,57,.09),-5px -5px 12px white,inset 1px 1px 0 white;
+}
+.panel {
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.96);
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(247,251,247,.57));
+  box-shadow:var(--sp-glass-shadow),inset 1px 1px 0 rgba(255,255,255,.98),inset -1px -1px 0 rgba(220,237,224,.45);
+  backdrop-filter:blur(24px) saturate(155%);
+  -webkit-backdrop-filter:blur(24px) saturate(155%);
+}
+.panel::before {
+  content:"";
+  position:absolute;inset:0;
+  border-radius:inherit;
+  background:linear-gradient(130deg,rgba(255,255,255,.38),transparent 34%,transparent 70%,rgba(221,243,226,.16));
+  pointer-events:none;
+}
+.panel > * {position:relative;z-index:1}
+.panel:hover {
+  transform:translateY(-2px);
+  box-shadow:18px 22px 48px rgba(28,70,49,.11),-10px -10px 30px rgba(255,255,255,.96),inset 1px 1px 0 white;
+}
+.map-head,.nearest-head,.section-title {
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(8,127,104,.09);
+}
+.live,.pill {
+  border:1px solid rgba(255,255,255,.92);
+  background:linear-gradient(145deg,rgba(235,250,240,.95),rgba(213,240,223,.72));
+  box-shadow:3px 4px 9px rgba(36,78,55,.07),-3px -3px 8px white;
+}
+.map {
+  border:1px solid rgba(255,255,255,.98);
+  box-shadow:inset 6px 7px 15px rgba(37,75,55,.12),inset -5px -5px 13px rgba(255,255,255,.88),0 8px 20px rgba(31,73,52,.06);
+}
+.map-control button {
+  border:1px solid rgba(255,255,255,.95);
+  background:rgba(255,255,255,.78);
+  box-shadow:6px 7px 15px rgba(35,76,53,.12),-4px -4px 12px rgba(255,255,255,.95),inset 1px 1px 0 white;
+  backdrop-filter:blur(16px);
+}
+.map-control button:hover {transform:translateY(-2px) scale(1.04)}
+.legend i {box-shadow:0 0 0 3px rgba(255,255,255,.78),0 2px 7px rgba(21,70,48,.14)}
+.shelter {
+  position:relative;
+  margin:4px 0;
+  padding:14px 12px;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:16px;
+  background:linear-gradient(145deg,rgba(255,255,255,.60),rgba(239,248,241,.48));
+  box-shadow:5px 6px 14px rgba(40,78,56,.055),-5px -5px 13px rgba(255,255,255,.85),inset 1px 1px 0 rgba(255,255,255,.9);
+}
+.shelter:hover {
+  transform:translateY(-3px);
+  border-color:rgba(8,127,104,.22);
+  background:rgba(255,255,255,.82);
+  box-shadow:9px 12px 22px rgba(36,79,56,.10),-6px -6px 15px white,inset 1px 1px 0 white;
+}
+.shelter-icon {
+  background:linear-gradient(145deg,#fafffb,#e1f0e5);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:5px 6px 13px rgba(41,80,58,.09),-4px -4px 10px white,inset 1px 1px 0 white;
+}
+.capacity {
+  background:rgba(211,226,215,.72);
+  box-shadow:inset 2px 2px 5px rgba(40,76,55,.12),inset -1px -1px 3px rgba(255,255,255,.8);
+}
+.capacity i {box-shadow:0 1px 5px rgba(8,127,104,.2)}
+.shelter-btn,.secondary,.action,.chip {
+  border:1px solid rgba(255,255,255,.96);
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(231,244,235,.72));
+  box-shadow:7px 8px 17px rgba(39,78,57,.085),-5px -5px 14px white,inset 1px 1px 0 white;
+}
+.shelter-btn {color:var(--green)}
+.shelter-btn:hover,.secondary:hover,.chip:hover {
+  transform:translateY(-3px);
+  box-shadow:10px 12px 22px rgba(39,78,57,.12),-6px -6px 16px white,inset 1px 1px 0 white;
+}
+.action {
+  color:white;
+  background:linear-gradient(135deg,#0d987b,#056b59);
+  border-color:rgba(255,255,255,.46);
+  box-shadow:8px 10px 20px rgba(6,112,88,.22),inset 2px 2px 5px rgba(255,255,255,.22),inset -2px -2px 5px rgba(0,51,42,.18);
+}
+.action:hover {box-shadow:11px 14px 25px rgba(6,112,88,.25),inset 2px 2px 5px rgba(255,255,255,.22)}
+.notice-card {
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.92);
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,250,232,.84),rgba(255,244,212,.58));
+  box-shadow:8px 10px 23px rgba(112,86,25,.075),-6px -6px 16px rgba(255,255,255,.88),inset 1px 1px 0 white;
+  backdrop-filter:blur(16px);
+}
+.notice-card::after {
+  content:"";
+  position:absolute;width:160px;height:160px;left:-70px;bottom:-100px;
+  border:1px solid rgba(210,166,65,.16);border-radius:50%;
+  box-shadow:0 0 0 18px rgba(255,255,255,.12),0 0 0 38px rgba(255,255,255,.08);
+}
+.notice-icon {
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:5px 6px 12px rgba(135,101,26,.10),-4px -4px 10px rgba(255,255,255,.9),inset 1px 1px 0 white;
+}
+.field input,.field select,.field textarea,#search {
+  border:1px solid rgba(255,255,255,.96);
+  border-radius:13px;
+  background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(238,247,240,.64));
+  box-shadow:inset 4px 4px 9px rgba(41,77,56,.065),inset -4px -4px 9px rgba(255,255,255,.96),0 3px 8px rgba(35,74,51,.025);
+  transition:border-color .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.field input:focus,.field select:focus,.field textarea:focus,#search:focus {
+  border-color:rgba(8,127,104,.42);
+  background:rgba(255,255,255,.96);
+  box-shadow:inset 2px 2px 5px rgba(41,77,56,.04),0 0 0 4px rgba(8,127,104,.09),0 8px 18px rgba(35,74,51,.07);
+}
+.result {
+  border:1px solid rgba(255,255,255,.94);
+  border-radius:15px;
+  background:linear-gradient(145deg,rgba(255,255,255,.83),rgba(231,244,235,.62));
+  box-shadow:6px 7px 15px rgba(39,78,57,.075),-5px -5px 13px white,inset 1px 1px 0 white;
+}
+.table-wrap {
+  border:1px solid rgba(255,255,255,.88);
+  border-radius:15px;
+  background:rgba(255,255,255,.42);
+  box-shadow:var(--sp-neo-inset);
+  padding:4px;
+}
+.table tbody tr {transition:background .2s ease}
+.table tbody tr:hover {background:rgba(222,243,229,.55)}
+.table td {border-bottom-color:rgba(8,127,104,.08)}
+.graph {
+  border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(145deg,rgba(241,249,242,.92),rgba(221,238,225,.7));
+  box-shadow:var(--sp-neo-inset),0 8px 20px rgba(35,74,51,.055);
+}
+.step {
+  border:1px solid rgba(255,255,255,.96);
+  background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(238,247,240,.62));
+  box-shadow:5px 6px 13px rgba(39,78,57,.06),-4px -4px 10px white;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.step.active {
+  border-color:rgba(8,127,104,.28);
+  background:linear-gradient(145deg,rgba(231,249,238,.96),rgba(213,239,222,.72));
+  box-shadow:inset 3px 3px 8px rgba(42,91,61,.07),inset -3px -3px 8px white,0 5px 14px rgba(8,127,104,.08);
+}
+.footer {border-top-color:rgba(255,255,255,.85)}
+/* Fine pointer only: more tactile hover without disturbing touch devices */
+@media (hover:hover) and (pointer:fine) {
+  .brandmark,.qicon,.shelter-icon,.notice-icon,.help-button,.location-status-icon {
+    transition:transform .28s ease,box-shadow .28s ease,background .28s ease;
+  }
+  .quick-card:hover .qicon,.shelter:hover .shelter-icon {transform:translateY(-2px) rotate(-3deg)}
+  .location-status:hover .location-status-icon,.help-button:hover {transform:translateY(-2px) scale(1.06)}
+  .step:hover {transform:translateX(-3px);box-shadow:8px 10px 20px rgba(39,78,57,.09),-5px -5px 12px white}
+}
+@media (max-width:991.98px) {
+  .panel {backdrop-filter:blur(18px) saturate(145%)}
+  .hero-copy,.hero-art {box-shadow:12px 15px 32px rgba(25,75,52,.12),inset 1px 1px 0 rgba(255,255,255,.55)}
+}
+@media (max-width:575.98px) {
+  body {background-attachment:scroll}
+  .panel {backdrop-filter:blur(16px) saturate(140%)}
+  .quick-card,.shelter,.result {box-shadow:5px 6px 12px rgba(39,78,57,.065),-4px -4px 10px rgba(255,255,255,.9),inset 1px 1px 0 white}
+}
+@media (prefers-reduced-motion:reduce) {
+  .page.active {animation:none}
+  html {scroll-behavior:auto}
+}
+
+
+/* Final typography + eyebrow cleanup */
+:root { --font-scale:1.34; }
+
+/* The small section/hero eyebrow is plain typography, not a pill */
+.eyebrow {
+  display:inline-block !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  letter-spacing:0 !important;
+  line-height:1.7;
+  font-size:calc(var(--font-scale) * 9px) !important;
+}
+
+/* More balanced text sizing inside form controls and search fields */
+.field input,
+.field select,
+.field textarea,
+#search {
+  font-family:inherit;
+  font-size:calc(var(--font-scale) * 10px) !important;
+  line-height:1.55;
+}
+.field input::placeholder,
+.field textarea::placeholder,
+#search::placeholder {
+  font-family:inherit;
+  font-size:calc(var(--font-scale) * 9px) !important;
+  font-weight:400;
+  color:#87948d;
+  opacity:1;
+}
+.field label {
+  font-size:calc(var(--font-scale) * 9px) !important;
+  font-weight:700;
+}
+.location-status-copy b {font-size:calc(var(--font-scale) * 9px)}
+.location-status-copy small {font-size:calc(var(--font-scale) * 8px)}
+.table th,.table td {font-size:calc(var(--font-scale) * 8px)}
+.step {font-size:calc(var(--font-scale) * 8px)}
+.step b {font-size:calc(var(--font-scale) * 9px)}
+.result small {font-size:calc(var(--font-scale) * 8px)}
+.capacity-note,.legend {font-size:calc(var(--font-scale) * 7px)}
+.shelter-info b {font-size:calc(var(--font-scale) * 9px)}
+.shelter-info small {font-size:calc(var(--font-scale) * 7.5px)}
+.distance {font-size:calc(var(--font-scale) * 8px)}
+
+/* Gradual, controlled typography reduction on smaller screens */
+@media (max-width:1199.98px) {
+  :root {--font-scale:1.25}
+}
+@media (max-width:991.98px) {
+  :root {--font-scale:1.17}
+}
+@media (max-width:767.98px) {
+  :root {--font-scale:1.08}
+  .field input,.field select,.field textarea,#search {font-size:calc(var(--font-scale) * 10px)!important}
+  .field input::placeholder,.field textarea::placeholder,#search::placeholder {font-size:calc(var(--font-scale) * 9px)!important}
+}
+@media (max-width:575.98px) {
+  :root {--font-scale:1.00}
+  .eyebrow {font-size:9px!important}
+  .field input,.field select,.field textarea,#search {font-size:12px!important}
+  .field input::placeholder,.field textarea::placeholder,#search::placeholder {font-size:11px!important}
+}
+@media (max-width:399.98px) {
+  :root {--font-scale:.94}
+  .field input,.field select,.field textarea,#search {font-size:11px!important}
+  .field input::placeholder,.field textarea::placeholder,#search::placeholder {font-size:10px!important}
+}
+
+</style>
+</head>
+<body>
+<header class="top">
+ <a class="brand" href="#" onclick="show('home');return false"><span class="brandmark">⌖</span><span class="brandname">SafePath<small>پیدا کردن مسیر امن</small></span></a>
+ <nav class="nav"><a href="#home" class="active" data-view="home">خانه</a><a href="#route" data-view="route">مسیریابی</a><a href="#shelters" data-view="shelters">پناهگاه‌ها</a><a href="#about" data-view="about">درباره سامانه</a></nav>
+ <div class="header-tools">
+  <button class="location-status" type="button" onclick="toast('در نسخه نهایی، پس از اجازه شما موقعیت GPS دریافت می‌شود.')" aria-label="وضعیت موقعیت مکانی">
+   <span class="location-status-icon">⌖</span>
+   <span class="location-status-copy"><b>موقعیت مکانی</b><small><i></i> آماده دریافت موقعیت</small></span>
+  </button>
+  <button class="help-button" type="button" onclick="show('about')" aria-label="راهنمای SafePath" title="راهنمای سامانه">?</button>
+ </div>
+</header>
+<div class="wrap">
+<section class="page active" id="home">
+ <div class="welcome"><div><div class="eyebrow">SAFEPATH · همراه مسیر امن</div><h1>برای پیدا کردن پناهگاه آماده‌اید؟</h1><p>موقعیت خود را مشخص کنید تا پناهگاه‌های اطراف و مسیرهای پیشنهادی را ببینید.</p></div><div class="date">● پروتوتایپ تعاملی · داده‌های نمونه</div></div>
+ <div class="hero">
+  <div class="hero-copy"><div class="eyebrow">در شرایط اضطراری، آگاهانه حرکت کن</div><h2>مسیر امن‌تر، تصمیم سریع‌تر.</h2><p>موقعیت خود را مشخص کن تا پناهگاه‌های اطراف و مسیر پیشنهادی را در یک نگاه ببینی.</p><button class="primary" onclick="show('route')">پیدا کردن پناهگاه نزدیک　←</button></div>
+  <div class="hero-art"><div class="float one"><i></i> پناهگاه‌های اطراف شما</div><div class="art-circle"><div class="art-pin"><span>⌖</span></div></div><div class="float two">✦　همراه امن شما</div></div>
+ </div>
+ <div class="quick">
+  <div class="quick-card"><div class="qicon">⌂</div><div><b>۵</b><small>پناهگاه در محدوده نمونه</small></div></div>
+  <div class="quick-card"><div class="qicon">↗</div><div><b>۱٫۲ km</b><small>فاصله تا نزدیک‌ترین پناهگاه</small></div></div>
+  <div class="quick-card"><div class="qicon">◷</div><div><b>۶ دقیقه</b><small>زمان تخمینی پیاده‌روی</small></div></div>
+ </div>
+ <div class="content-grid">
+  <div class="panel"><div class="map-head"><b>پناهگاه‌های اطراف شما</b><span class="live">● نقشه نمونه</span></div>
+   <div class="map"><svg viewBox="0 0 700 390" preserveAspectRatio="xMidYMid slice">
+   <defs><pattern id="city" width="105" height="78" patternUnits="userSpaceOnUse"><rect x="5" y="5" width="40" height="28" rx="4" fill="#d8e5d8"/><rect x="54" y="5" width="45" height="28" rx="4" fill="#dfe9dc"/><rect x="5" y="41" width="40" height="32" rx="4" fill="#e1eadf"/><rect x="54" y="41" width="45" height="32" rx="4" fill="#d7e4d7"/></pattern></defs>
+   <rect width="700" height="390" fill="#eaf0e8"/><rect width="700" height="390" fill="url(#city)"/>
+   <path d="M-10 105H720M-10 265H720M145 -20V420M370 -20V420M575 -20V420" stroke="#fff" stroke-width="15"/><path d="M-10 105H720M-10 265H720M145 -20V420M370 -20V420M575 -20V420" stroke="#cbd8ce" stroke-width="1.5"/>
+   <path d="M-20 345Q120 300 250 345T520 340T730 310" stroke="#a8d4d3" stroke-width="25" fill="none"/><path d="M-20 345Q120 300 250 345T520 340T730 310" stroke="#fff" stroke-width="2" stroke-dasharray="6 7" fill="none"/>
+   <path d="M505 210L450 105L370 105L260 185L145 105" stroke="#087f68" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"/>
+   <g font-family="Vazirmatn" fill="#8b9d8f" font-size="10"><text x="28" y="91">خیابان اصلی</text><text x="400" y="250">محدوده مرکزی</text><text x="210" y="325">پارک محله</text></g>
+   <g transform="translate(505 210)"><circle r="18" fill="#087f68" opacity=".15"/><circle r="9" fill="#087f68" stroke="white" stroke-width="3"/><text x="0" y="30" text-anchor="middle" font-family="Vazirmatn" font-size="10" fill="#172b2a">موقعیت شما</text></g>
+   <g transform="translate(145 105)"><circle r="15" fill="#16a078" opacity=".18"/><circle r="8" fill="#16a078" stroke="white" stroke-width="3"/><text x="0" y="-18" text-anchor="middle" font-family="Vazirmatn" font-size="10" fill="#172b2a">پناهگاه مرکزی</text></g>
+   <g transform="translate(370 105)"><circle r="8" fill="#16a078" stroke="white" stroke-width="3"/><text x="0" y="-17" text-anchor="middle" font-family="Vazirmatn" font-size="10" fill="#172b2a">مرکز بهار</text></g>
+   <g transform="translate(450 290)"><circle r="8" fill="#e0a33d" stroke="white" stroke-width="3"/></g>
+   </svg><div class="map-control"><button onclick="toast('بزرگ‌نمایی نمایشی')">＋</button><button onclick="toast('کوچک‌نمایی نمایشی')">−</button><button onclick="toast('موقعیت نمونه شما')">◎</button></div></div>
+   <div class="map-foot"><span class="legend"><i style="background:#087f68"></i>موقعیت شما</span><span class="legend"><i style="background:#16a078"></i>پناهگاه فعال</span><span class="legend"><i style="background:#e0a33d"></i>ظرفیت محدود</span><span class="legend"><i style="background:#087f68"></i>مسیر پیشنهادی</span></div>
+  </div>
+  <div class="panel nearest"><div class="nearest-head"><h2>نزدیک‌ترین پناهگاه‌ها</h2><span>بر اساس موقعیت نمونه</span></div>
+   <div class="shelter"><div class="shelter-top"><div class="shelter-icon">⌂</div><div class="shelter-info"><b>پناهگاه مرکزی ولیعصر</b><small>منطقه ۶ · ظرفیت آزاد ۶۸ نفر</small></div><span class="distance">۱٫۲ km</span></div><div class="capacity"><i style="width:62%"></i></div><div class="capacity-note"><span>ظرفیت باقی‌مانده</span><span>۳۸٪ آزاد</span></div></div>
+   <div class="shelter"><div class="shelter-top"><div class="shelter-icon">⌂</div><div class="shelter-info"><b>مرکز فرهنگی بهار</b><small>منطقه ۷ · ظرفیت آزاد ۷۲ نفر</small></div><span class="distance">۱٫۸ km</span></div><div class="capacity"><i style="width:40%"></i></div><div class="capacity-note"><span>ظرفیت باقی‌مانده</span><span>۶۰٪ آزاد</span></div></div>
+   <div class="shelter"><div class="shelter-top"><div class="shelter-icon">⌂</div><div class="shelter-info"><b>مجموعه ورزشی آزادی</b><small>منطقه ۹ · ظرفیت محدود</small></div><span class="distance">۳٫۴ km</span></div><div class="capacity"><i style="width:95%;background:#e0a33d"></i></div><div class="capacity-note"><span>ظرفیت باقی‌مانده</span><span>۵٪ آزاد</span></div></div>
+   <button class="shelter-btn" onclick="show('shelters')">مشاهده همه پناهگاه‌ها　←</button>
+  </div>
+ </div>
+ <div class="bottom">
+  <div class="notice-card"><div class="notice-icon">!</div><div><b>نکته ایمنی</b><p>در شرایط واقعی بحران، فقط به اطلاعات رسمی و دستورالعمل نهادهای امدادی و مدیریت بحران اعتماد کنید. این نسخه صرفاً نمونه طراحی است.</p></div></div>
+  <div class="panel"><div class="section-title"><div><h2>آخرین رویدادها</h2><p>گزارش محیط آزمایشی</p></div></div><div class="activity-item"><i class="activity-dot"></i><div><b>ظرفیت پناهگاه مرکزی به‌روزرسانی شد</b><small>چند دقیقه پیش · داده نمایشی</small></div></div><div class="activity-item"><i class="activity-dot" style="background:#e0a33d"></i><div><b>یک محدودیت در مسیر فرعی ثبت شد</b><small>۱۴ دقیقه پیش · سناریوی آزمایشی</small></div></div></div>
+ </div>
+</section>
+<section class="page" id="route">
+ <div class="welcome"><div><div class="eyebrow">مسیریابی هوشمند</div><h1>به کدام پناهگاه برویم؟</h1><p>مبدأ و شرایط حرکت را مشخص کن تا گزینه‌های مناسب را ببینی.</p></div><span class="date">نسخه آزمایشی · بدون GPS واقعی</span></div>
+ <div class="panel formpanel"><div class="section-title"><div><h2>مشخصات مسیر</h2><p>اطلاعات زیر فقط برای شبیه‌سازی رابط کاربری استفاده می‌شود.</p></div></div>
+ <div class="fields"><div class="field"><label>مبدأ حرکت</label><select id="origin"><option>موقعیت فعلی نمونه</option><option>میدان ولیعصر</option><option>میدان انقلاب</option><option>پارک لاله</option></select></div><div class="field"><label>تعداد افراد همراه</label><input id="people" type="number" min="1" max="20" value="2"></div><div class="field"><label>شیوه جابه‌جایی</label><select id="mode"><option value="walk">پیاده</option><option value="wheel">ویلچر / مسیر دسترس‌پذیر</option><option value="car">خودرو</option></select></div><div class="field"><label>اولویت انتخاب مسیر</label><select id="priority"><option value="time">کمترین زمان رسیدن</option><option value="safe">محدودیت کمتر</option><option value="crowd">ازدحام کمتر</option></select></div></div>
+ <div style="display:flex;gap:9px;margin-top:17px;flex-wrap:wrap"><button class="action" onclick="calculate()">نمایش مسیر پیشنهادی ←</button><button class="secondary" onclick="toast('فرم پاک شد')">بازنشانی</button></div>
+ <div id="routeAnswer" class="hidden"><div class="route-result"><div class="result"><b id="rTime">۶ دقیقه</b><small>زمان تخمینی</small></div><div class="result"><b id="rDist">۱٫۲ کیلومتر</b><small>طول مسیر</small></div><div class="result"><b id="rShelter">ولیعصر</b><small>پناهگاه پیشنهادی</small></div></div><div class="notice-card"><div class="notice-icon">✓</div><div><b>گزینه پیشنهادی آماده است</b><p id="rNote">این نتیجه صرفاً داده نمایشی است و مسیر واقعی محاسبه نشده است.</p></div></div></div>
+ </div>
+ <div class="panel" style="margin-top:17px"><div class="section-title"><div><h2>نمای مسیر</h2><p>نقشه شماتیک محیط نمونه</p></div><span class="live">نقشه آزمایشی</span></div><div class="map" style="height:300px"><svg viewBox="0 0 700 390"><rect width="700" height="390" fill="#eaf0e8"/><path d="M-10 100H720M-10 260H720M140 -20V420M370 -20V420M575 -20V420" stroke="#fff" stroke-width="17"/><path d="M500 220L450 100L370 100L250 180L140 100" stroke="#087f68" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#d7e4d8"><rect x="20" y="20" width="90" height="55" rx="7"/><rect x="175" y="20" width="130" height="55" rx="7"/><rect x="405" y="20" width="130" height="55" rx="7"/><rect x="20" y="135" width="90" height="90" rx="7"/><rect x="405" y="135" width="130" height="90" rx="7"/></g><circle cx="500" cy="220" r="10" fill="#087f68" stroke="#fff" stroke-width="4"/><circle cx="140" cy="100" r="10" fill="#16a078" stroke="#fff" stroke-width="4"/></svg></div></div>
+</section>
+<section class="page" id="shelters">
+ <div class="welcome"><div><div class="eyebrow">مراکز امن</div><h1>فهرست پناهگاه‌ها</h1><p>ظرفیت و وضعیت مراکز موجود در محدوده نمونه.</p></div></div>
+ <div class="panel"><div class="section-title"><div><h2>پناهگاه‌های ثبت‌شده</h2><p>اطلاعات ساختگی برای نمایش جدول و وضعیت‌ها</p></div><input id="search" placeholder="جستجوی نام یا منطقه..." oninput="filterTable()" style="border:1px solid var(--line);padding:9px 12px;border-radius:10px;width:210px"></div><div class="table-wrap"><table class="table" id="shelterTable"><thead><tr><th>نام پناهگاه</th><th>منطقه</th><th>ظرفیت کل</th><th>ظرفیت آزاد</th><th>وضعیت</th><th>فاصله</th></tr></thead><tbody>
+ <tr><td><b>پناهگاه مرکزی ولیعصر</b></td><td>منطقه ۶</td><td>۱۸۰</td><td>۶۸</td><td><span class="pill">فعال</span></td><td>۱٫۲ km</td></tr>
+ <tr><td><b>مرکز فرهنگی بهار</b></td><td>منطقه ۷</td><td>۱۲۰</td><td>۷۲</td><td><span class="pill">فعال</span></td><td>۱٫۸ km</td></tr>
+ <tr><td><b>مجموعه ورزشی آزادی</b></td><td>منطقه ۹</td><td>۲۵۰</td><td>۱۲</td><td><span class="pill warn">ظرفیت محدود</span></td><td>۳٫۴ km</td></tr>
+ <tr><td><b>مدرسه ایمن اندیشه</b></td><td>منطقه ۶</td><td>۹۰</td><td>۰</td><td><span class="pill red">تکمیل ظرفیت</span></td><td>۲٫۱ km</td></tr>
+ <tr><td><b>مرکز امدادی شماره ۲</b></td><td>منطقه ۱۲</td><td>۱۶۰</td><td>۸۹</td><td><span class="pill">فعال</span></td><td>۲٫۷ km</td></tr>
+ </tbody></table></div></div>
+</section>
+<section class="page" id="about">
+ <div class="welcome"><div><div class="eyebrow">درباره پروژه</div><h1>SafePath؛ پیدا کردن مسیر امن</h1><p>یک نمونه مفهومی برای مسیریابی به نزدیک‌ترین پناهگاه با کمک الگوریتم A*.</p></div></div>
+ <div class="panel"><h2 style="font-size:16px">هدف سامانه</h2><p style="color:var(--muted);font-size:12px;max-width:800px">SafePath با هدف نمایش مسیر مناسب از موقعیت کاربر تا پناهگاه تعریف‌شده طراحی شده است. در نسخه دانشگاهی، الگوریتم A* روی گراف مسیرها اجرا می‌شود تا با توجه به هزینه حرکت و تخمین فاصله تا مقصد، مسیر پیشنهادی را پیدا کند.</p><div class="route-result"><div class="result"><b>A*</b><small>الگوریتم جست‌وجو</small></div><div class="result"><b>Graph</b><small>مدل مسیرها</small></div><div class="result"><b>UI Prototype</b><small>نسخه مستقل رابط کاربری</small></div></div><div class="notice-card"><div class="notice-icon">i</div><div><b>محدودیت نسخه فعلی</b><p>این پروتوتایپ به GPS، API، سرور، پایگاه داده یا سرویس نقشه متصل نیست. تمام اطلاعات، ظرفیت‌ها و مسیرها داده نمونه‌اند و برای استفاده در شرایط اضطراری واقعی مناسب نیستند.</p></div></div></div>
+ <div class="panel" style="margin-top:17px"><div class="section-title"><div><h2>نمای مفهومی الگوریتم A*</h2><p>ترکیب هزینه طی‌شده و تخمین هزینه باقی‌مانده</p></div><button class="action" onclick="runAstar()">اجرای نمایش گام‌به‌گام</button></div><div class="algo"><div class="graph"><svg viewBox="0 0 600 280"><g stroke="#c7d5ce" stroke-width="4"><path d="M65 210L165 165L275 220L390 150L525 205M65 210L110 70L245 55L390 150M110 70L165 165M245 55L275 220M245 55L430 50L525 205" fill="none"/></g><path id="astarPath" d="" stroke="#087f68" stroke-width="6" fill="none"/><g fill="#fff" stroke="#0b9b7c" stroke-width="4"><circle cx="65" cy="210" r="14"/><circle cx="110" cy="70" r="14"/><circle cx="165" cy="165" r="14"/><circle cx="245" cy="55" r="14"/><circle cx="275" cy="220" r="14"/><circle cx="390" cy="150" r="14"/><circle cx="430" cy="50" r="14"/><circle cx="525" cy="205" r="14"/></g><g fill="#172b2a" font-size="12" text-anchor="middle"><text x="65" y="214">S</text><text x="110" y="74">A</text><text x="165" y="169">B</text><text x="245" y="59">C</text><text x="275" y="224">D</text><text x="390" y="154">E</text><text x="430" y="54">F</text><text x="525" y="209">G</text></g></svg></div><div class="steps"><div class="step active" id="aStep"><b>گام ۰ · آماده‌سازی</b>مبدأ و مقصد روی گراف مشخص می‌شوند.</div><div class="step" id="aStep1"><b>گام ۱ · محاسبه f(n)</b>f(n) = g(n) + h(n)</div><div class="step" id="aStep2"><b>گام ۲ · گسترش گره‌ها</b>گره با کمترین هزینه تخمینی انتخاب می‌شود.</div><div class="step" id="aStep3"><b>گام ۳ · یافتن مقصد</b>مسیر نهایی بازسازی می‌شود.</div></div></div></div>
+</section>
+<div class="footer"><span>© SafePath · پروتوتایپ مفهومی پروژه دانشگاهی</span><span>نسخه مستقل رابط کاربری · داده‌های آزمایشی</span></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.view===id));history.replaceState(null,'','#'+id);window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.view)}));
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2300)}
+function calculate(){let mode=document.getElementById('mode').value,people=Math.max(1,+document.getElementById('people').value||1),priority=document.getElementById('priority').value;let mins=mode==='car'?4:mode==='wheel'?9:6;if(priority==='crowd')mins+=2;if(priority==='safe')mins+=1;if(people>5)mins++;document.getElementById('rTime').textContent=mins+' دقیقه';document.getElementById('rDist').textContent=mode==='wheel'?'۱٫۴ کیلومتر':mode==='car'?'۱٫۶ کیلومتر':'۱٫۲ کیلومتر';document.getElementById('rShelter').textContent=mode==='wheel'?'مرکز بهار':'ولیعصر';document.getElementById('rNote').textContent='برای '+people+' نفر، نتیجه نمایشی بر اساس اولویت انتخابی آماده شد. این مسیر از الگوریتم واقعی یا نقشه زنده به دست نیامده است.';document.getElementById('routeAnswer').classList.remove('hidden');toast('نتیجه نمایشی آماده شد')}
+function filterTable(){let q=document.getElementById('search').value;document.querySelectorAll('#shelterTable tbody tr').forEach(r=>r.style.display=r.textContent.includes(q)?'':'none')}
+let astarStep=0;function runAstar(){astarStep=Math.min(astarStep+1,3);let texts=['گام ۰ · آماده‌سازی','گام ۱ · محاسبه هزینه','گام ۲ · گسترش گره‌ها','گام ۳ · یافتن مقصد'];for(let i=0;i<4;i++){let el=document.getElementById(i===0?'aStep':'aStep'+i);el.classList.toggle('active',i===astarStep)}document.getElementById('astarPath').setAttribute('d',astarStep===0?'':astarStep===1?'M65 210L110 70':astarStep===2?'M65 210L110 70L245 55L390 150':'M65 210L110 70L245 55L390 150L525 205');if(astarStep===3)toast('نمایش مسیر نمونه به پایان رسید');else toast(texts[astarStep])}
+let start=location.hash.slice(1);if(start&&document.getElementById(start))show(start);
+</script>
+</body></html>
