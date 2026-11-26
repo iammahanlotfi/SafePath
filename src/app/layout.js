@@ -1,3 +1,4 @@
+import Toast from "@/components/layout/Toast/Toast";
 import "./globals.css";
 import { vazirmatn } from "@/fonts";
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="fa" dir="rtl">
       <body className={vazirmatn.variable}>
         {children}
+        <Toast/>
         </body>
     </html>
   );
