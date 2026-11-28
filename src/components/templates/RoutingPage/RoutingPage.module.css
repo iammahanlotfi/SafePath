@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  animation: pageIn 0.48s
+    cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    animation: none;
+  }
+}
