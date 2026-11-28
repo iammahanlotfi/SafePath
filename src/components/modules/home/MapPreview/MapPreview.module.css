@@ -1,0 +1,327 @@
+.container {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  padding: calc(var(--ui-scale) * 19px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: calc(var(--radius) * 1.08);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.88),
+    rgba(235, 246, 238, 0.65)
+  );
+  box-shadow:
+    var(--sp-glass-shadow),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  transition: box-shadow var(--transition-normal);
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.55),
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: calc(var(--ui-scale) * 13px);
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: calc(var(--font-scale) * 13px);
+  font-weight: 800;
+  line-height: 1.8;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding:
+    calc(var(--ui-scale) * 4px)
+    calc(var(--ui-scale) * 10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  background: linear-gradient(
+    145deg,
+    #f4fcf7,
+    #e0f2e7
+  );
+  color: var(--green);
+  font-size: calc(var(--font-scale) * 9px);
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow:
+    var(--sp-neo-raised),
+    inset 1px 1px 0 white;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.map {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: calc(var(--ui-scale) * 335px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: calc(var(--ui-scale) * 15px);
+  background: #e8eee7;
+  box-shadow:
+    inset 5px 5px 15px rgba(43, 83, 60, 0.08),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.8);
+}
+
+.mapSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mapLabel {
+  font-family: var(--font-vazirmatn), Arial, sans-serif;
+  font-size: 10px;
+  fill: var(--ink);
+}
+
+.controls {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--ui-scale) * 12px);
+  left: calc(var(--ui-scale) * 12px);
+  display: grid;
+  gap: calc(var(--ui-scale) * 6px);
+}
+
+.controls button {
+  display: grid;
+  place-items: center;
+  width: calc(var(--ui-scale) * 34px);
+  height: calc(var(--ui-scale) * 34px);
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: calc(var(--ui-scale) * 10px);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(235, 247, 239, 0.85)
+  );
+
+  color: var(--green);
+  cursor: pointer;
+  box-shadow:
+    5px 6px 14px rgba(34, 76, 54, 0.12),
+    inset 1px 1px 0 white;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.controls button svg {
+  width: calc(var(--font-scale) * 16px);
+  height: calc(var(--font-scale) * 16px);
+  stroke-width: 1.8;
+}
+
+.controls button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--ui-scale) * 15px);
+  margin-top: calc(var(--ui-scale) * 12px);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ui-scale) * 6px);
+  color: var(--muted);
+  font-size: calc(var(--font-scale) * 9px);
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.legendDot {
+  display: inline-block;
+  flex-shrink: 0;
+  width: calc(var(--ui-scale) * 8px);
+  height: calc(var(--ui-scale) * 8px);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.78),
+    0 2px 7px rgba(21, 70, 48, 0.14);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .container:hover {
+    box-shadow:
+      0 22px 52px rgba(28, 57, 48, 0.095),
+      0 3px 10px rgba(28, 57, 48, 0.035),
+      inset 1px 1px 0 white;
+  }
+
+  .controls button:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:
+      7px 9px 18px rgba(34, 76, 54, 0.16),
+      inset 1px 1px 0 white;
+  }
+}
+
+.controls button:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 1199.98px) {
+  .container {
+    padding: 20px;
+  }
+
+  .map {
+    height: 350px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .container {
+    padding: 17px;
+  }
+
+  .map {
+    height: 290px;
+  }
+
+  .footer {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .container {
+    padding: 14px;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .map {
+    height: 245px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .controls button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .footer {
+    gap: 10px 14px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header h2 {
+    font-size: calc(var(--font-scale) * 12px);
+  }
+
+  .map {
+    height: 220px;
+  }
+
+  .controls {
+    top: 9px;
+    left: 9px;
+    gap: 6px;
+  }
+
+  .controls button {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+
+  .legend {
+    font-size: calc(var(--font-scale) * 8px);
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header {
+    gap: 6px;
+  }
+
+  .status {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .map {
+    height: 200px;
+  }
+
+  .legend {
+    font-size: calc(var(--font-scale) * 7px);
+  }
+
+  .legendDot {
+    width: 7px;
+    height: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .controls button {
+    transition: none;
+  }
+
+  .controls button:hover,
+  .controls button:active {
+    transform: none;
+  }
+}

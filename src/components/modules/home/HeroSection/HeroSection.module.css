@@ -1,0 +1,389 @@
+.container {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: calc(var(--ui-scale) * 18px);
+  margin-bottom: calc(var(--ui-scale) * 19px);
+  direction: rtl;
+}
+
+.banner,
+.visualCard {
+  position: relative;
+  min-width: 0;
+  min-height: calc(var(--ui-scale) * 250px);
+  border-radius: calc(var(--ui-scale) * 26px);
+  overflow: hidden;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:
+    calc(var(--ui-scale) * 30px)
+    calc(var(--ui-scale) * 32px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(217, 243, 107, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 100%,
+      rgba(77, 205, 158, 0.22),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #087f68 0%,
+      #086b5c 56%,
+      #064f48 100%
+    );
+  box-shadow:
+    18px 22px 46px rgba(6, 91, 72, 0.20),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.24),
+    inset -1px -1px 0 rgba(0, 50, 40, 0.18);
+}
+
+.banner::before,
+.banner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.banner::before {
+  width: 230px;
+  height: 230px;
+  right: -60px;
+  bottom: -145px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  box-shadow:
+    0 0 0 22px rgba(255, 255, 255, 0.045),
+    0 0 0 48px rgba(255, 255, 255, 0.028),
+    0 0 0 78px rgba(255, 255, 255, 0.018);
+}
+
+.banner::after {
+  width: 340px;
+  height: 340px;
+  left: -90px;
+  top: -150px;
+  border: calc(var(--ui-scale) * 1px)
+    solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 0 0 35px rgba(255, 255, 255, 0.055),
+    0 0 0 72px rgba(255, 255, 255, 0.03),
+    0 0 0 112px rgba(255, 255, 255, 0.018);
+}
+
+.bannerEyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  color: var(--lime);
+  font-size: calc(var(--font-scale) * 9px);
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.banner h2 {
+  position: relative;
+  z-index: 1;
+  max-width: calc(var(--ui-scale) * 480px);
+  margin:
+    calc(var(--ui-scale) * 7px)
+    0
+    calc(var(--ui-scale) * 4px);
+  color: white;
+  font-size: calc(var(--font-scale) * 24px);
+  font-weight: 800;
+  line-height: 1.6;
+  text-shadow: 0 3px 18px rgba(0, 45, 35, 0.18);
+}
+
+.banner p {
+  position: relative;
+  z-index: 1;
+  max-width: calc(var(--ui-scale) * 460px);
+  margin: 0 0 calc(var(--ui-scale) * 18px);
+  color: #d5ebe4;
+  font-size: calc(var(--font-scale) * 12px);
+  line-height: 1.8;
+}
+
+.bannerButton {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: calc(var(--ui-scale) * 12px);
+  padding:
+    calc(var(--ui-scale) * 11px)
+    calc(var(--ui-scale) * 18px);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: calc(var(--ui-scale) * 12px);
+  background: linear-gradient(
+    145deg,
+    #e9ff9b,
+    #d4ef64
+  );
+  color: #23352b;
+  font-size: calc(var(--font-scale) * 12px);
+  font-weight: 800;
+  line-height: 1.8;
+  text-decoration: none;
+  box-shadow:
+    8px 9px 20px rgba(0, 40, 31, 0.20),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 4px rgba(126, 151, 37, 0.12);
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease;
+}
+
+.bannerButton:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bannerButton:hover {
+    filter: brightness(0.97);
+    transform: translateY(-1px);
+  }
+}
+
+.visualCard {
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(255, 255, 255, 0.78),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(255, 255, 255, 0.9),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(226, 243, 230, 0.88),
+      rgba(205, 229, 211, 0.72)
+    );
+  box-shadow:
+    var(--sp-glass-shadow),
+    inset 5px 5px 18px rgba(56, 94, 67, 0.07),
+    inset -6px -6px 18px rgba(255, 255, 255, 0.95);
+}
+
+.mapOrbit {
+  position: relative;
+  width: calc(var(--ui-scale) * 215px);
+  height: calc(var(--ui-scale) * 215px);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.17);
+  box-shadow:
+    0 0 0 14px rgba(255, 255, 255, 0.16),
+    0 0 0 30px rgba(255, 255, 255, 0.10),
+    inset 5px 5px 16px rgba(49, 94, 63, 0.07),
+    inset -5px -5px 16px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.mapOrbit::before,
+.mapOrbit::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mapOrbit::before {
+  inset: calc(var(--ui-scale) * 22px);
+  border: calc(var(--ui-scale) * 1px)
+    dashed rgba(8, 127, 104, 0.20);
+}
+
+.mapOrbit::after {
+  inset: calc(var(--ui-scale) * 48px);
+  border: calc(var(--ui-scale) * 1px)
+    solid rgba(8, 127, 104, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mapMarker {
+  width: calc(var(--ui-scale) * 72px);
+  height: calc(var(--ui-scale) * 72px);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius:
+    calc(var(--ui-scale) * 25px)
+    calc(var(--ui-scale) * 25px)
+    calc(var(--ui-scale) * 25px)
+    calc(var(--ui-scale) * 7px);
+  background: linear-gradient(
+    145deg,
+    #13a486,
+    #056c59
+  );
+  color: white;
+  transform: rotate(-45deg);
+  box-shadow:
+    12px 15px 28px rgba(5, 104, 83, 0.28),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.35),
+    inset -3px -3px 6px rgba(0, 53, 43, 0.18);
+}
+
+.mapMarkerIcon {
+  position: relative;
+  z-index: 1;
+  width: calc(var(--ui-scale) * 20px);
+  height: calc(var(--ui-scale) * 20px);
+  color: white;
+  transform: rotate(45deg);
+}
+
+.shelterBadge,
+.companionBadge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ui-scale) * 5px);
+  padding:
+    calc(var(--ui-scale) * 8px)
+    calc(var(--ui-scale) * 12px);
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  border-radius: calc(var(--ui-scale) * 12px);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  font-size: calc(var(--font-scale) * 10px);
+  font-weight: 700;
+  line-height: 1.8;
+  white-space: nowrap;
+  box-shadow:
+    10px 12px 24px rgba(40, 77, 57, 0.10),
+    -6px -6px 18px rgba(255, 255, 255, 0.9),
+    inset 1px 1px 0 white;
+  backdrop-filter: blur(20px) saturate(155%);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+}
+
+.shelterBadge {
+  top: calc(var(--ui-scale) * 27px);
+  right: calc(var(--ui-scale) * 25px);
+}
+
+.companionBadge {
+  bottom: calc(var(--ui-scale) * 27px);
+  left: calc(var(--ui-scale) * 23px);
+}
+
+.statusDot {
+  width: calc(var(--ui-scale) * 7px);
+  height: calc(var(--ui-scale) * 7px);
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #16a078;
+}
+
+@media (max-width: 1199.98px) {
+  .banner {
+    padding: 27px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  }
+
+  .banner h2 {
+    font-size: calc(var(--font-scale) * 19px);
+  }
+
+  .banner,
+  .visualCard {
+    box-shadow:
+      12px 15px 32px rgba(25, 75, 52, 0.12),
+      inset 1px 1px 0 rgba(255, 255, 255, 0.55);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .banner {
+    min-height: 210px;
+  }
+
+  .visualCard {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .banner {
+    min-height: 200px;
+    padding: 21px;
+  }
+
+  .bannerEyebrow {
+    font-size: 9px;
+  }
+
+  .banner h2 {
+    font-size: calc(var(--font-scale) * 20px);
+  }
+
+  .banner p {
+    font-size: calc(var(--font-scale) * 11px);
+  }
+
+  .visualCard {
+    min-height: 175px;
+  }
+
+  .mapOrbit {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .banner {
+    padding: 18px;
+  }
+
+  .banner h2 {
+    font-size: calc(var(--font-scale) * 18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bannerButton {
+    transition: none;
+  }
+
+  .bannerButton:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,94 @@
+.container {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  animation: pageIn 0.48s cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.dashboardGrid,
+.bottomGrid {
+  display: grid;
+  align-items: stretch;
+  gap: calc(var(--ui-scale) * 17px);
+  margin-top: calc(var(--ui-scale) * 17px);
+}
+
+.dashboardGrid {
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+}
+
+.bottomGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .dashboardGrid,
+  .bottomGrid {
+    gap: 17px;
+  }
+
+  .dashboardGrid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+
+  .bottomGrid {
+    margin-top: 17px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .dashboardGrid,
+  .bottomGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .bottomGrid {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .dashboardGrid,
+  .bottomGrid {
+    gap: 14px;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .dashboardGrid,
+  .bottomGrid {
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .dashboardGrid,
+  .bottomGrid {
+    gap: 10px;
+    margin-top: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    animation: none;
+  }
+}

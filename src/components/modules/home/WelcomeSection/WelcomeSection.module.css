@@ -1,0 +1,119 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: calc(var(--ui-scale) * 20px);
+  margin-bottom: calc(var(--ui-scale) * 23px);
+  padding: 10px 2px 17px;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 90px;
+  right: -24px;
+  top: -20px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse,
+    var(--sp-glow-green),
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.content {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: var(--green);
+  font-size: calc(var(--font-scale) * 9px);
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.content h1 {
+  margin: calc(var(--ui-scale) * 3px) 0 0;
+  color: var(--ink);
+  font-size: calc(var(--font-scale) * 27px);
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.7px;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+.content p {
+  margin: calc(var(--ui-scale) * 3px) 0 0;
+  color: var(--muted);
+  font-size: calc(var(--font-scale) * 12px);
+  line-height: 1.8;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: calc(var(--ui-scale) * 8px)
+    calc(var(--ui-scale) * 13px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.56);
+  color: var(--muted);
+  font-size: calc(var(--font-scale) * 10px);
+  box-shadow: var(--sp-neo-raised);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+@media (max-width: 767.98px) {
+  .container {
+    align-items: flex-start;
+  }
+
+  .content h1 {
+    font-size: calc(var(--font-scale) * 22px);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .container {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .content h1 {
+    font-size: calc(var(--font-scale) * 20px);
+  }
+
+  .content p {
+    font-size: calc(var(--font-scale) * 11px);
+  }
+
+  .status {
+    font-size: calc(var(--font-scale) * 9px);
+  }
+}
+
+@media (max-width: 399.98px) {
+  .content h1 {
+    font-size: calc(var(--font-scale) * 19px);
+  }
+}
